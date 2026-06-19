@@ -1,0 +1,45 @@
+id,name,brand,description,price,is_available,category,sub_category,image,unit,score
+1,Ail,DJOWDA,Ail,40.0,1,Légumes,Légumes,1.webp,KG,0
+2,Artichaut,DJOWDA,Artichaut,150.0,1,Légumes,Légumes,2.webp,KG,0
+3,Asperges,DJOWDA,Asperges,0.0,0,Légumes,Légumes,3.webp,KG,0
+4,Betterave,DJOWDA,Betterave,110.0,0,Légumes,Légumes,4.webp,KG,0
+5,Cardon blanc,DJOWDA,Cardon blanc,0.0,0,Légumes,Légumes,5.webp,KG,0
+6,Carotte,DJOWDA,Carotte,100.0,1,Légumes,Légumes,6.webp,KG,0
+7,Chou-Fleur,DJOWDA,Chou-Fleur,180.0,0,Légumes,Légumes,7.webp,KG,0
+8,Chou,DJOWDA,Chou,0.0,0,Légumes,Légumes,8.webp,KG,0
+9,Concombre,DJOWDA,Concombre,0.0,0,Légumes,Légumes,9.webp,KG,0
+10,Courgette Verte,DJOWDA,Courgette Verte,120.0,1,Légumes,Légumes,10.webp,KG,0
+11,Fenouil,DJOWDA,Fenouil,0.0,0,Légumes,Légumes,11.webp,KG,0
+12,Haricot blanc,DJOWDA,Haricot blanc,0.0,0,Légumes,Légumes,12.webp,KG,0
+13,Haricots verts,DJOWDA,Haricots verts,450.0,1,Légumes,Légumes,13.webp,KG,0
+14,Laitue,DJOWDA,Laitue,170.0,1,Légumes,Légumes,14.webp,KG,0
+15,Oignon Blanc,DJOWDA,Oignon Blanc,0.0,0,Légumes,Légumes,15.webp,KG,0
+16,Oignon Rouge,DJOWDA,Oignon Rouge,50.0,1,Légumes,Légumes,16.webp,KG,0
+17,Patate douce B,DJOWDA,Patate douce B,0.0,0,Légumes,Légumes,17.webp,KG,0
+18,Patate douce R,DJOWDA,Patate douce R,0.0,0,Légumes,Légumes,18.webp,KG,0
+19,Poivron corne,DJOWDA,Poivron corne,100.0,1,Légumes,Légumes,19.webp,KG,0
+20,Tomate,DJOWDA,Tomate,100.0,1,Légumes,Légumes,20.webp,KG,0
+21,aubergine,DJOWDA,aubergine,120.0,1,Légumes,Légumes,21.webp,KG,0
+22,brocoli,DJOWDA,brocoli,0.0,0,Légumes,Légumes,22.webp,KG,0
+23,pomme DT,DJOWDA,pomme DT,80.0,1,Légumes,Légumes,23.webp,KG,0
+24,Abricot,DJOWDA,Abricot,350.0,0,Fruits,Fruits,24.webp,KG,0
+25,Ananas,DJOWDA,Ananas,0.0,0,Fruits,Fruits,25.webp,PIECE,0
+26,Avocat,DJOWDA,Avocat,0.0,0,Fruits,Fruits,26.webp,KG,0
+27,Banane,DJOWDA,Banane,0.0,0,Fruits,Fruits,27.webp,KG,0
+28,Cerises,DJOWDA,Cerises,0.0,0,Fruits,Fruits,28.webp,KG,0
+29,Citron,DJOWDA,Citron,290.0,1,Fruits,Fruits,29.webp,KG,0
+30,Coing,DJOWDA,Coing,0.0,0,Fruits,Fruits,30.webp,KG,0
+31,Dattes,DJOWDA,Dattes,850.0,0,Fruits,Fruits,31.webp,KG,0
+32,Grenade,DJOWDA,Grenade,0.0,0,Fruits,Fruits,32.webp,KG,0
+33,Jujube,DJOWDA,Jujube,0.0,0,Fruits,Fruits,33.webp,KG,0
+34,Kiwi,DJOWDA,Kiwi,0.0,0,Fruits,Fruits,34.webp,KG,0
+35,Nefle,DJOWDA,Nefle,350.0,0,Fruits,Fruits,35.webp,KG,0
+36,Orange,DJOWDA,Orange,250.0,1,Fruits,Fruits,36.webp,KG,0
+37,Pasteque,DJOWDA,Pasteque,110.0,1,Fruits,Fruits,37.webp,KG,0
+38,Poire,DJOWDA,Poire,0.0,0,Fruits,Fruits,38.webp,KG,0
+39,Pomme,DJOWDA,Pomme,900.0,0,Fruits,Fruits,39.webp,KG,0
+40,Prune jaune,DJOWDA,Prune jaune,0.0,0,Fruits,Fruits,40.webp,KG,0
+41,Prune rouge,DJOWDA,Prune rouge,0.0,0,Fruits,Fruits,41.webp,KG,0
+42,Raisin rouge,DJOWDA,Raisin rouge,0.0,0,Fruits,Fruits,42.webp,KG,0
+43,Raisins Noir,DJOWDA,Raisins Noir,0.0,0,Fruits,Fruits,43.webp,KG,0
+44,Raisins,DJOWDA,Raisins,0.0,0,Fruits,Fruits,44.webp,KG,0

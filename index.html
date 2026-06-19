@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── PRIMARY SEO ───────────────────────────────────────── -->
+  <!-- TODO: update title / description / keywords for your deployment -->
+  <title>Food Freedom Map — Drop Your Pin</title>
+  <meta name="description" content="Drop a pin anywhere on earth. Join the open food network. 1 million pins to validate open food infrastructure for everyone, everywhere — powered by the DIFP protocol." />
+  <meta name="keywords" content="food freedom map, open food network, DIFP, food coordination, food availability, Nostr food, food security map" />
+  <meta name="robots" content="index, follow" />
+  <!-- TODO: set canonical URL once deployed -->
+  <link rel="canonical" href="https://example.org/food-freedom-map/" />
+
+  <!-- ── OPEN GRAPH ─────────────────────────────────────────── -->
+  <!-- TODO: update OG tags for your deployment -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.org/food-freedom-map/" />
+  <meta property="og:title" content="Food Freedom Map — Drop Your Pin" />
+  <meta property="og:description" content="A live, open map of the world's food ecosystem. Drop your pin. No account. No tracking. Powered by DIFP and the Nostr network." />
+  <meta property="og:image" content="assets/images/og-map.jpg" />
+  <meta property="og:site_name" content="Food Freedom Map" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- ── TWITTER CARD ───────────────────────────────────────── -->
+  <!-- TODO: set your twitter:site handle for your deployment -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Food Freedom Map — Drop Your Pin" />
+  <meta name="twitter:description" content="A live, open map of the world's food ecosystem. Drop your pin. No account. No tracking." />
+  <meta name="twitter:image" content="assets/images/og-map.jpg" />
+
+  <!-- ── STRUCTURED DATA ────────────────────────────────────── -->
+  <!-- TODO: set url / creator for your deployment -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Food Freedom Map",
+      "url": "https://example.org/food-freedom-map/",
+      "description": "An open, decentralized map of the global food ecosystem. Anyone can drop a pin to show they are a farmer, store, restaurant, or community member — powered by the DIFP protocol and Nostr.",
+      "applicationCategory": "FoodAndDrink",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Drop a pin anywhere on earth",
+        "No account required",
+        "Decentralized via Nostr protocol",
+        "Real-time food availability data",
+        "DIFP open food protocol"
+      ]
+    }
+  </script>
+
+  <link rel="icon" type="image/webp" href="assets/images/favicon.webp" />
+
+  <!-- ── Leaflet ─────────────────────────────────────────────── -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+  <!-- ── App styles ─────────────────────────────────────────── -->
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+
+<!-- ── HEADER ──────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="header-inner">
+
+    <!-- Logo -->
+    <!-- TODO: point href at your own homepage, swap in your logo asset -->
+    <a class="logo" href="#" rel="noopener" aria-label="Home">
+      <img class="logo-img" src="assets/images/logo.png" alt="Logo" width="32" height="32" />
+      <span class="logo-text">Food Freedom Map</span>
+    </a>
+
+    <div class="header-divider"></div>
+
+    <!-- Pin counter -->
+    <div class="header-stats" aria-live="polite" aria-label="Pin count progress">
+      <div class="stat">
+        <span class="stat-value" id="pin-count">—</span>
+        <span class="stat-label">pins</span>
+      </div>
+      <div class="stat-divider">/</div>
+      <div class="stat">
+        <span class="stat-value goal">1,000,000</span>
+        <span class="stat-label">goal</span>
+      </div>
+
+    </div>
+
+    <!-- CTA hint -->
+    <div class="header-cta">
+      <span class="cta-hint">↓ Click anywhere on the map to drop your pin</span>
+    </div>
+
+  </div>
+  <div class="progress-bar-wrap" role="progressbar" aria-label="Pins toward 1 million goal" aria-valuemin="0" aria-valuemax="1000000">
+    <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+  </div>
+</header>
+
+<!-- ── MAP ─────────────────────────────────────────────── -->
+<div id="map" role="application" aria-label="Interactive food freedom map"></div>
+
+<!-- ── SEARCH PANEL (top-right) ────────────────────────── -->
+<div class="search-panel" role="search" aria-label="Jump to location">
+  <div class="search-panel-inner">
+    <div class="search-header" id="search-header">
+      <span class="search-title">🔍 Jump to location</span>
+      <span class="search-toggle-icon open" id="search-toggle-icon" aria-hidden="true">▲</span>
+    </div>
+    <div class="search-body" id="search-body">
+      <div>
+        <label class="search-label" for="search-coords">Coordinates</label>
+        <input
+                type="text"
+                class="search-input"
+                id="search-coords"
+                placeholder="lat, lng  (e.g. 36.74, 3.09)"
+                autocomplete="off"
+        />
+      </div>
+      <div class="search-divider">OR</div>
+      <div>
+        <label class="search-label" for="search-cellid">Cell ID</label>
+        <input
+                type="text"
+                class="search-input"
+                id="search-cellid"
+                placeholder="e.g. 1711935606"
+                autocomplete="off"
+        />
+      </div>
+      <button class="search-btn" id="search-btn">🚀 Go</button>
+      <div class="search-result" id="search-result" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── STATUS BAR ──────────────────────────────────────── -->
+<div class="status-bar" role="status" aria-live="polite">
+  <span class="status-dot connecting" id="status-dot"></span>
+  <span id="status-text">Connecting to Nostr relay…</span>
+
+  <div class="scan-indicator">
+    <div class="scan-dot loading"></div>
+    <span>Connecting…</span>
+  </div>
+</div>
+
+
+<!-- ── PIN DIALOG ──────────────────────────────────────── -->
+<div class="dialog-backdrop" id="dialog-backdrop" aria-hidden="true">
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+
+    <div class="dialog-header">
+      <h2 id="dialog-title">📍 Drop your pin</h2>
+      <button class="dialog-close" id="dialog-close" aria-label="Close pin dialog">✕</button>
+    </div>
+
+    <div class="dialog-coords" id="dialog-coords"></div>
+
+    <div class="avatar-preview-wrap">
+      <img id="avatar-preview" src="" alt="Selected avatar" class="avatar-preview" />
+      <div class="avatar-badge" id="avatar-badge">S</div>
+    </div>
+
+    <label class="field-label" for="input-name">Your name</label>
+    <input
+            type="text" id="input-name" class="field-input"
+            placeholder="e.g. Marché El Baraka" maxlength="60"
+            autocomplete="organization"
+    />
+
+    <label class="field-label">I am a…</label>
+    <div class="type-grid" id="type-grid" role="radiogroup" aria-label="Select your role in the food ecosystem"></div>
+
+    <label class="field-label">Choose your avatar</label>
+    <div class="avatar-grid" id="avatar-grid" role="radiogroup" aria-label="Select an avatar"></div>
+
+    <!-- Online / Offline status -->
+    <div class="status-row">
+      <span class="status-row-label">Status</span>
+      <span style="display:flex; align-items:center; gap:10px;">
+        <span id="status-toggle-label"></span>
+        <label class="switch" aria-label="Toggle online status">
+          <input type="checkbox" id="status-toggle" checked />
+          <span class="switch-slider"></span>
+        </label>
+      </span>
+    </div>
+
+    <!-- Catalog tabs -->
+    <div class="catalog-tabs" role="tablist" aria-label="Catalog type">
+      <button class="catalog-tab active" data-tab="l" role="tab" aria-selected="true" aria-controls="tab-listing">🛒 Listing</button>
+      <button class="catalog-tab" data-tab="a" role="tab" aria-selected="false" aria-controls="tab-ask">🙋 Ask</button>
+      <button class="catalog-tab" data-tab="d" role="tab" aria-selected="false" aria-controls="tab-donation">🎁 Donation</button>
+    </div>
+
+    <!-- Listing panel -->
+    <div class="catalog-panel active" data-tab="l" id="tab-listing" role="tabpanel">
+      <input type="text" class="catalog-search" id="listing-search" placeholder="Search items…" aria-label="Search listing items" />
+      <div class="catalog-items" id="listing-items">
+        <div class="catalog-loading">Loading products…</div>
+      </div>
+    </div>
+
+    <!-- Ask panel -->
+    <div class="catalog-panel" data-tab="a" id="tab-ask" role="tabpanel" hidden>
+      <div class="catalog-panel-toggle-row">
+        <div>
+          <div class="catalog-panel-toggle-label">Listed as Ask</div>
+          <div class="catalog-panel-hint">Show that you're requesting these items</div>
+        </div>
+        <label class="switch" aria-label="Enable ask listing">
+          <input type="checkbox" id="ask-toggle" />
+          <span class="switch-slider"></span>
+        </label>
+      </div>
+      <input type="text" class="catalog-search" id="ask-search" placeholder="Search items…" aria-label="Search ask items" />
+      <div class="catalog-items" id="ask-items">
+        <div class="catalog-loading">Loading products…</div>
+      </div>
+    </div>
+
+    <!-- Donation panel -->
+    <div class="catalog-panel" data-tab="d" id="tab-donation" role="tabpanel" hidden>
+      <div class="catalog-panel-toggle-row">
+        <div>
+          <div class="catalog-panel-toggle-label">Listed as Donation</div>
+          <div class="catalog-panel-hint">Show that you're offering these items for free</div>
+        </div>
+        <label class="switch" aria-label="Enable donation listing">
+          <input type="checkbox" id="donation-toggle" />
+          <span class="switch-slider"></span>
+        </label>
+      </div>
+      <input type="text" class="catalog-search" id="donation-search" placeholder="Search items…" aria-label="Search donation items" />
+      <div class="catalog-items" id="donation-items">
+        <div class="catalog-loading">Loading products…</div>
+      </div>
+    </div>
+
+    <button class="btn-primary" id="btn-place-pin">
+      <span id="btn-label">📍 Place my pin</span>
+      <span id="btn-spinner" class="spinner hidden" aria-hidden="true"></span>
+    </button>
+
+    <p class="dialog-note">
+      Your pin is signed with a locally generated key and broadcast to the open Nostr network.<br>
+      No account. No tracking. Fully open.
+    </p>
+  </div>
+</div>
+
+<!-- ── INFO POPUP ──────────────────────────────────────── -->
+<div class="info-popup" id="info-popup" aria-hidden="true" role="dialog" aria-labelledby="info-name">
+  <button class="info-popup-close" id="info-popup-close" aria-label="Close info panel">✕</button>
+
+  <div class="info-popup-header">
+    <img id="info-avatar" src="" alt="" class="info-avatar" />
+    <div class="info-body">
+      <div class="info-name" id="info-name"></div>
+      <div class="info-type" id="info-type"></div>
+      <div class="info-cell" id="info-cell"></div>
+    </div>
+  </div>
+
+  <div class="view-catalog-tabs" role="tablist" aria-label="View catalog type">
+    <button class="view-catalog-tab active" data-tab="l" role="tab" aria-selected="true">🛒 Listing</button>
+    <button class="view-catalog-tab" data-tab="a" role="tab" aria-selected="false">🙋 Ask</button>
+    <button class="view-catalog-tab" data-tab="d" role="tab" aria-selected="false">🎁 Donation</button>
+  </div>
+
+  <div class="view-catalog-results" id="view-catalog-results" aria-live="polite"></div>
+</div>
+
+<!-- ── TOAST ────────────────────────────────────────────── -->
+<div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+
+</body>
+</html>
