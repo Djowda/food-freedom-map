@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="src/food_freedom_map.jpg" alt="Food Freedom Map Banner" width="100%">
+</p>
+
 # Food Freedom Map
 
 A live, open map of the global food ecosystem. Drop a pin to show you're a farmer, store, restaurant, or community member — no account, no tracking, no central server.
